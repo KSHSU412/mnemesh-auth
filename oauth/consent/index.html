@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://esm.sh; connect-src https://esm.sh https://winxqiisqwkoxvusrame.supabase.co; style-src 'self'; img-src data:; base-uri 'none'; frame-ancestors 'none'; form-action 'self'">
+  <meta name="referrer" content="no-referrer">
+  <link rel="stylesheet" href="/mnemesh-auth/styles.css">
+  <title>連接 MNEMESH</title>
+</head>
+<body>
+  <main>
+    <div class="mark">⌁</div>
+    <h1>連接 MNEMESH</h1>
+    <p>讓 ChatGPT 代你記錄、查詢和回顧訓練。你隨時可以撤銷連接。</p>
+    <section id="login" class="hidden">
+      <form id="login-form">
+        <input id="email" name="email" type="email" autocomplete="email" placeholder="你的 Email" required>
+        <button class="primary" type="submit">寄送登入連結</button>
+      </form>
+    </section>
+    <section id="consent" class="hidden">
+      <div class="panel">
+        <div id="client" class="client">ChatGPT</div>
+        <p id="account"></p>
+        <div class="scope"><span class="dot"></span><span>讀取你的訓練場次、動作、重量與次數</span></div>
+        <div class="scope"><span class="dot"></span><span>依照你的指示新增或完成訓練紀錄</span></div>
+      </div>
+      <div class="actions">
+        <button id="deny" class="secondary" type="button">取消</button>
+        <button id="approve" class="primary" type="button">允許連接</button>
+      </div>
+    </section>
+    <div id="status">正在確認連接資訊…</div>
+    <footer>MNEMESH 只儲存訓練資料；ChatGPT 每次寫入仍受你的帳號權限限制。</footer>
+  </main>
+  <script type="module" src="/mnemesh-auth/app.js"></script>
+</body>
+</html>
