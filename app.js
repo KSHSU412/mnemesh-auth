@@ -12,7 +12,7 @@ const supabase = createClient(projectURL, publishableKey, {
     flowType: "pkce",
     persistSession: true,
     autoRefreshToken: true,
-    detectSessionInUrl: true,
+    detectSessionInUrl: false,
   },
 });
 
@@ -76,11 +76,12 @@ document.querySelector("#login-form").addEventListener("submit", async (event) =
 });
 
 document.querySelector("#approve").addEventListener("click", async (event) => {
-  event.currentTarget.disabled = true;
+  const button = event.currentTarget;
+  button.disabled = true;
   status.textContent = "正在連接…";
   const { data, error } = await supabase.auth.oauth.approveAuthorization(authorizationID);
   if (error) {
-    event.currentTarget.disabled = false;
+    button.disabled = false;
     showError(error);
     return;
   }
@@ -88,10 +89,11 @@ document.querySelector("#approve").addEventListener("click", async (event) => {
 });
 
 document.querySelector("#deny").addEventListener("click", async (event) => {
-  event.currentTarget.disabled = true;
+  const button = event.currentTarget;
+  button.disabled = true;
   const { data, error } = await supabase.auth.oauth.denyAuthorization(authorizationID);
   if (error) {
-    event.currentTarget.disabled = false;
+    button.disabled = false;
     showError(error);
     return;
   }
