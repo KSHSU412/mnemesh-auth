@@ -7,16 +7,15 @@
   <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://esm.sh; connect-src https://esm.sh https://winxqiisqwkoxvusrame.supabase.co; style-src 'self'; img-src data:; base-uri 'none'; frame-ancestors 'none'; form-action 'self'">
   <meta name="referrer" content="no-referrer">
   <link rel="stylesheet" href="/mnemesh-auth/styles.css">
-  <title>完成 MNEMESH 登入</title>
+  <title>MNEMESH 登入</title>
 </head>
 <body>
   <main>
     <div class="mark">⌁</div>
-    <h1>完成登入</h1>
-    <p>正在帶你回到 MNEMESH 授權頁。</p>
-    <section id="login" class="hidden"><form id="login-form"><input id="email" type="email"><button type="submit">繼續</button></form></section>
-    <section id="consent" class="hidden"><div id="client"></div><div id="account"></div><button id="deny" type="button">取消</button><button id="approve" type="button">允許</button></section>
-    <div id="status">正在驗證登入連結…</div>
+    <h1>MNEMESH 登入</h1>
+    <p>驗證成功後會回到授權頁，尚未授予 AI 存取權限。</p>
+    <div id="status" role="status" aria-live="polite">正在驗證登入連結…</div>
+    <button id="retry" class="secondary hidden" type="button" data-auth>重新登入</button>
   </main>
   <script type="module" src="/mnemesh-auth/app.js"></script>
 </body>

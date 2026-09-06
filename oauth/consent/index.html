@@ -13,12 +13,17 @@
   <main>
     <div class="mark">⌁</div>
     <h1>連接 MNEMESH</h1>
-    <p>讓 ChatGPT 代你記錄、查詢和回顧訓練。你隨時可以撤銷連接。</p>
+    <p>登入與手機 App 相同的帳號，再決定是否讓 AI 存取訓練資料。</p>
     <section id="login" class="hidden">
-      <form id="login-form">
-        <input id="email" name="email" type="email" autocomplete="email" placeholder="你的 Email" required>
-        <button class="primary" type="submit">寄送登入連結</button>
-      </form>
+      <button id="apple" class="apple" type="button" data-auth>使用 Apple 登入</button>
+      <details>
+        <summary>找回原有帳號</summary>
+        <p class="legacy-note">已有 Google／Email 帳號？請先用原帳號的 Email 登入，再從手機設定連結 Apple，以免建立不同帳號。</p>
+        <form id="login-form">
+          <input id="email" name="email" type="email" autocomplete="email" aria-label="你的 Email" placeholder="你的 Email" required>
+          <button class="secondary" type="submit" data-auth>寄送登入連結</button>
+        </form>
+      </details>
     </section>
     <section id="consent" class="hidden">
       <div class="panel">
@@ -28,12 +33,14 @@
         <div class="scope"><span class="dot"></span><span>依照你的指示新增或完成訓練紀錄</span></div>
       </div>
       <div class="actions">
-        <button id="deny" class="secondary" type="button">取消</button>
-        <button id="approve" class="primary" type="button">允許連接</button>
+        <button id="deny" class="secondary" type="button" data-auth>取消</button>
+        <button id="approve" class="primary" type="button" data-auth>允許連接</button>
       </div>
+      <button id="switch-account" class="text-button" type="button" data-auth>換個帳號</button>
     </section>
-    <div id="status">正在確認連接資訊…</div>
-    <footer>MNEMESH 只儲存訓練資料；ChatGPT 每次寫入仍受你的帳號權限限制。</footer>
+    <div id="status" role="status" aria-live="polite">正在確認連接資訊…</div>
+    <button id="retry" class="secondary hidden" type="button" data-auth>重新登入</button>
+    <footer>只授權 MNEMESH 訓練資料，不會存取你的 iCloud 資料。你隨時可以撤銷連接。</footer>
   </main>
   <script type="module" src="/mnemesh-auth/app.js"></script>
 </body>
