@@ -18,6 +18,7 @@ async function setup({ search = '?authorization_id=request-A', path = '/mnemesh-
   const calls = [];
   const record = (name, result) => async arg => { calls.push([name, arg]); return result; };
   const auth = {
+    getUser: record('user', { data: { user: { id: '11111111-2222-4333-8444-555555555555', email: 'owner@example.com' } } }),
     getSession: record('session', { data: { session: signedIn ? { user: { email: 'owner@example.com' } } : null } }),
     signInWithOAuth: record('apple', {}), signInWithOtp: record('email', {}), signOut: record('signout', {}),
     exchangeCodeForSession: record('exchange', {}),
@@ -27,7 +28,8 @@ async function setup({ search = '?authorization_id=request-A', path = '/mnemesh-
       denyAuthorization: record('deny', { data: { redirect_url: 'https://chatgpt.com/callback' } }),
     }, ...overrides,
   };
-  const context = { URL, URLSearchParams, createClient: (_, __, config) => {
+  const storage = new Map();
+  const context = { URL, URLSearchParams, sessionStorage: { getItem: k => storage.get(k), setItem: (k, v) => storage.set(k, v) }, createClient: (_, __, config) => {
     assert.equal(config.auth.flowType, 'pkce'); assert.equal(config.auth.detectSessionInUrl, false); return { auth };
   }, document: {
     querySelector: id => path.includes('/auth/callback') && !['#status', '#retry'].includes(id) ? null : node(id),
@@ -36,7 +38,7 @@ async function setup({ search = '?authorization_id=request-A', path = '/mnemesh-
   history: { replaceState: (...args) => calls.push(['cleanURL', args[2]]) } };
   vm.runInNewContext(source, context);
   await new Promise(resolve => setImmediate(resolve));
-  return { node, calls, click: async id => node(id).listeners.click(), submit: async () => node('#login-form').listeners.submit({ preventDefault() {} }) };
+  return { node, calls, storage, click: async id => node(id).listeners.click(), submit: async () => node('#login-form').listeners.submit({ preventDefault() {} }) };
 }
 
 test('anonymous flow shows login; Apple receives the request-specific PKCE callback', async () => {
@@ -102,4 +104,41 @@ test('consent failure restores both buttons', async () => {
     approveAuthorization: async () => ({ error: new Error('offline') }),
   } } });
   await s.click('#approve'); assert.equal(s.node('#approve').disabled, false); assert.equal(s.node('#deny').disabled, false);
+});
+test('verified account reference matches native UUID and is not logged', async () => {
+  const s = await setup({ signedIn: true });
+  assert.equal(s.node('#account-reference').textContent, '11111111-2222-4333-8444-555555555555');
+  const log = s.storage.get('mnemesh.oauth.diagnostics.v1');
+  assert.doesNotMatch(log, /owner@|11111111|request-A/);
+});
+test('expired browser session exposes Apple sign-in, never consent', async () => {
+  const s = await setup({ signedIn: true, overrides: { getUser: async () => ({ error: { status: 401, message: 'TOKEN-SECRET' } }) } });
+  assert.equal(s.node('#login').classList.contains('hidden'), false);
+  assert.equal(s.node('#consent').classList.contains('hidden'), true);
+  assert.match(s.node('#status').textContent, /session_expired/);
+  assert.doesNotMatch(s.storage.get('mnemesh.oauth.diagnostics.v1'), /TOKEN-SECRET/);
+  await s.click('#approve'); assert.equal(s.calls.some(x => x[0] === 'approve'), false);
+});
+test('expired authorization requests direct user back to ChatGPT', async () => {
+  const s = await setup({ signedIn: true, overrides: { oauth: {
+    getAuthorizationDetails: async () => ({ error: { status: 404 } }),
+  } } });
+  assert.match(s.node('#status').textContent, /request_expired/);
+  assert.equal(s.node('#retry').classList.contains('hidden'), true);
+});
+test('a previously approved grant still waits for account confirmation', async () => {
+  const s = await setup({ signedIn: true, overrides: { oauth: {
+    getAuthorizationDetails: async () => ({ data: { redirect_url: 'https://chatgpt.com/callback' } }),
+  } } });
+  assert.equal(s.calls.some(x => x[0] === 'redirect'), false);
+  await s.click('#approve'); assert.equal(s.calls.at(-1)[0], 'redirect');
+});
+test('account switched in another tab cannot approve the displayed account', async () => {
+  let n = 0;
+  const s = await setup({ signedIn: true, overrides: {
+    getUser: async () => ({ data: { user: { id: ++n === 1 ? 'old-owner' : 'new-owner' } } }),
+  } });
+  await s.click('#approve');
+  assert.match(s.node('#status').textContent, /account_changed/);
+  assert.equal(s.calls.some(x => x[0] === 'approve'), false);
 });

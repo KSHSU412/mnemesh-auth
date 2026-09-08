@@ -153,3 +153,4 @@ footer {
   font-size: 12px;
   line-height: 1.5;
 }
+.account-reference { overflow-wrap: anywhere; font-family: ui-monospace, monospace; font-size: 13px; user-select: all; }
