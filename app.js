@@ -59,10 +59,10 @@ const showError = (error) => {
   status.classList.add("error");
   const messages = {
     session_expired: "登入已失效。請重新使用與手機相同的 Apple 帳號登入，再允許連接。",
-    request_expired: "這次授權連結已過期。請回到 ChatGPT 的 MNEMESH 設定重新連接，不要重複使用舊網址。",
+    request_expired: "這次授權連結已過期。請回到 ChatGPT 的 MuMesh 設定重新連接，不要重複使用舊網址。",
     account_changed: "瀏覽器帳號已變更，尚未授權。請重新載入並核對帳號識別碼。",
     rate_limited: "嘗試次數較多，請稍候再試。不要連續重複登入。",
-    retryable: "暫時無法完成操作，請再試一次；若仍失敗，請從 ChatGPT 重新連接 MNEMESH。",
+    retryable: "暫時無法完成操作，請再試一次；若仍失敗，請從 ChatGPT 重新連接 MuMesh。",
   };
   status.textContent = `${messages[category]}（${phase} / ${category}）`;
   if (["session_expired", "account_changed", "request_expired"].includes(category)) {
@@ -83,7 +83,7 @@ const initialize = async () => {
   record("started");
   if (!authorizationID) {
     status.classList.add("error");
-    status.textContent = "這不是完整的授權連結，請從 ChatGPT 重新連接 MNEMESH。";
+    status.textContent = "這不是完整的授權連結，請從 ChatGPT 重新連接 MuMesh。";
     return;
   }
   const code = params.get("code");
@@ -132,7 +132,7 @@ const initialize = async () => {
   // browser account after the phone switches identity.
   existingRedirect = details?.redirect_url || details?.redirectUrl ? details : null;
   document.querySelector("#client").textContent = details?.client?.name || details?.client_name || "AI 應用程式";
-  document.querySelector("#account").textContent = userData.user.email || "已登入 MNEMESH";
+  document.querySelector("#account").textContent = userData.user.email || "已登入 MuMesh";
   document.querySelector("#account-reference").textContent = displayedUserID.toLowerCase();
   consent.classList.remove("hidden");
   consentReady = true;
