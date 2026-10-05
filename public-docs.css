@@ -15,3 +15,6 @@ ul { padding-left:24px; }
 .date,footer { font-size:.875rem; color:#706d68; }
 footer { margin-top:48px; padding-top:24px; border-top:1px solid #e8e4de; }
 
+table { width:100%; border-collapse:collapse; margin:16px 0; }
+th,td { text-align:left; vertical-align:top; padding:10px 12px; border-bottom:1px solid #e8e4de; font-size:1rem; line-height:1.6; overflow-wrap:anywhere; }
+th { font-weight:600; }
