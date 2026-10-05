@@ -9,7 +9,7 @@
 </head>
 <body><main>
 <nav aria-label="文件導覽"><span>MuMesh</span><a href="../privacy/">隱私 Privacy</a><a href="../support/">支援 Support</a></nav>
-<p class="date">更新 Updated · 2026-09-26</p>
+<p class="date">更新 Updated · 2026-10-05</p>
 <h1>MuMesh 隱私政策／Privacy Policy</h1>
 <p>MuMesh 原名 MNEMESH。此次更名不改變帳號、資料用途或隱私原則；既有 Apple 授權與 AI 連接可能仍顯示舊名稱。Formerly MNEMESH. This rename does not change accounts, data use or privacy practices; existing Apple grants and AI connections may retain the former name.</p>
 
@@ -24,6 +24,7 @@
 <li>手錶動作資料：開啟「採集」後，Apple Watch 會在訓練時記錄六軸動作（加速度與角速度）和收到的心率，結束後存到你的 iPhone。它只存在你的手錶與 iPhone，不會自動上傳；你可以隨時關閉採集或刪除已存的資料。</li>
 <li>同步紀錄與問題報告：為了排除手機與手錶同步問題，App 在裝置上保留有限的操作紀錄（時間、狀態與錯誤類型，不含動作名稱、重量、次數、心率或感測資料）。只有你主動分享時才會離開裝置。</li>
 <li>連接紀錄與設定：AI 工具名稱、操作時間與結果、行事曆匯出偏好，用於功能運作及排錯。</li>
+<li>場次計數：登入後，雲端會記下你的帳號有哪幾場訓練記過組（訓練的識別碼、開始時間、記下第一組的時間、來源裝置或工具，以及是否為測試訓練），用於之後計算方案額度。目前只計算，不收費也不限制。刪除單場訓練不會刪除這筆計數；刪除帳號時會一併刪除。</li>
 <li>支援：只有你主動聯絡時提供的訊息或附件。請勿寄送密碼、登入連結或不必要的健康資料。</li>
 </ul>
 
@@ -32,9 +33,9 @@
 <ul>
 <li>提供內容：只有你每次自己選擇的那場訓練，包含手錶六軸動作資料、採集期間收到的心率、每組的動作、重量、次數與時間，以及那場的同步紀錄。不包含電子郵件、姓名、帳號識別碼或備註。</li>
 <li>提供方式：你用系統分享（例如 AirDrop、LINE 或 Email）傳給開發者；App 不會自動上傳。經由 LINE 或 Email 傳送時，副本也會經過該服務。</li>
-<li>用途：只用於開發與驗證自動記組與漏記助手。不販售、不外流、不用於廣告，也不提供給其他公司。</li>
-<li>保存：存放在開發者自己的電腦。該項開發結束時（包含停止這個計畫），會刪除所有收到的資料；你也可以隨時要求刪除。刪除後，已用這些資料訓練出的模型不含可辨識的個人資料，可能會繼續使用。</li>
-<li>風險：動作與心率屬於和健康相關的個人資料，可能看出你的運動習慣與時間。</li>
+<li>用途：只用於開發與驗證自動記組與漏記助手。不販售、不用於廣告，也不交給其他公司或外部 AI 服務處理。</li>
+<li>保存：保存在開發者自己的電腦上，只有開發者本人使用。計畫停止時會刪除收到的原始資料；你也可以隨時來信要求刪除你傳過的資料。如果資料已經用來訓練模型，刪除原始資料後，已訓練的模型可能會繼續使用。</li>
+<li>風險：動作與心率屬於和健康相關的個人資料，可能看出你的運動習慣與時間。開發者會用合理的方式保護，但沒有任何方式能保證絕對不會外洩。</li>
 <li>退出與刪除：可隨時在 App 內停止參加；已傳出的資料請來信要求刪除。參加者須年滿 18 歲。</li>
 </ul>
 <p>開發者作為服務營運者，只會為了服務運作、排除問題、安全或依你的要求處理雲端紀錄；不會把你同步到雲端的訓練紀錄用於開發或訓練自動記組模型，除非你另外明確同意。</p>
@@ -52,11 +53,11 @@
 
 <h2>English</h2>
 <p>MuMesh is a strength-training logger for iPhone and Apple Watch. You may log locally without an account. Signing in enables Supabase sync for that account's workouts and plans; previously local-only records are not automatically assigned to your account. MuMesh has no ads and no third-party analytics, and never sells data.</p>
-<p>We process your email, name supplied by a sign-in provider, user identifier and authentication credentials for account access; workout exercises, weights, reps or seconds, timestamps, notes and plans for logging and sync; and connector operation records and calendar export preferences for app functionality and troubleshooting.</p>
+<p>We process your email, name supplied by a sign-in provider, user identifier and authentication credentials for account access; workout exercises, weights, reps or seconds, timestamps, notes and plans for logging and sync; and connector operation records and calendar export preferences for app functionality and troubleshooting. Session count: when you are signed in, the cloud notes which of your workouts had a set logged (the workout's identifier, its start time, when its first set was logged, the device or tool it came from, and whether it is a test workout) to work out plan allowances later. For now it only counts: nothing is charged or limited. Deleting a workout does not remove its count entry; it is deleted with your account.</p>
 <p>Apple Health access is optional and system-authorized. Heart rate and Health summaries are displayed on-device and are not uploaded through MuMesh's Supabase workout sync. Fitness records such as workout times and sets do sync when signed in.</p>
 <p>Watch motion data: with capture turned on, Apple Watch records accelerometer and gyroscope data and received heart rate during workouts and saves it to your iPhone afterwards. It stays on your Watch and iPhone and is never uploaded automatically; you can turn capture off or delete saved data at any time. Sync logs and problem reports keep limited on-device records (times, states and error types, without exercise names, weights, reps, heart rate or sensor data) to troubleshoot phone–Watch sync; they leave your device only when you share them. Support receives only messages and attachments you choose to send.</p>
 <h3>Help improve automatic logging (voluntary)</h3>
-<p>MuMesh is building automatic set logging. You may join in Settings → Account &amp; data → Help improve automatic logging after reading the full disclosure and agreeing; the app records when you agreed or left, and the disclosure version, on your device. You provide only the workouts you choose each time: Watch motion data, heart rate received during capture, each set's exercise, weight, reps and time, and that workout's sync log — no email, name, account identifier or notes. You send it yourself through the system share sheet (for example AirDrop, LINE or email); nothing is uploaded automatically, and LINE or email also carry a copy. It is used only to build and check automatic set logging and the missed-set assistant, never sold, never leaked, never used for ads and never given to other companies. It is kept on the developer's own computer; when that work ends (including if the project is stopped), all received data is deleted, and you can ask for deletion at any time. Models already trained on it contain no identifiable personal data and may continue to be used after deletion. Motion and heart rate are personal, health-related data and can show your exercise habits and times. You can stop at any time in the app and email to delete what you sent. Participants must be 18 or older.</p>
+<p>MuMesh is building automatic set logging. You may join in Settings → Account &amp; data → Help improve automatic logging after reading the full disclosure and agreeing; the app records when you agreed or left, and the disclosure version, on your device. You provide only the workouts you choose each time: Watch motion data, heart rate received during capture, each set's exercise, weight, reps and time, and that workout's sync log — no email, name, account identifier or notes. You send it yourself through the system share sheet (for example AirDrop, LINE or email); nothing is uploaded automatically, and LINE or email also carry a copy. It is used only to build and check automatic set logging and the missed-set assistant. It is not sold, not used for ads, and not given to other companies or outside AI services to process. It is kept on the developer's own computer and used only by the developer. The raw data received is deleted if the project stops, and you can email at any time to delete what you sent. If your data has already been used to train a model, that model may continue to be used after the raw data is deleted. Motion and heart rate are personal, health-related data and can show your exercise habits and times. The developer protects them with reasonable care, but no method can guarantee they will never be exposed. You can stop at any time in the app and email to delete what you sent. Participants must be 18 or older.</p>
 <p>As the service operator, the developer handles cloud records only to run and secure the service, troubleshoot, or at your request, and does not use your synced workout records to build or train automatic logging models unless you explicitly agree.</p>
 <p>MuMesh does not sell personal or health data, add advertising tracking, or use Apple Health data for advertising. Supabase operates authentication and cloud storage. Apple operates Sign in with Apple, Health and TestFlight; Google handles Google sign-in when selected. Infrastructure providers may retain operational and security logs.</p>
 <p>AI connections are optional. Authorized AI services can read workouts/plans and write requested records using tools. Data returned to an AI service is governed by that service's own policies and account settings. Disconnecting does not erase existing AI conversations. You may also upload a previewed diagnostic for an authorized AI connection to read for 24 hours or 7 days; it excludes heart rate and raw sensor data and can be withdrawn at any time. Files, photos, calendar exports and sensor data copies are shared only when you choose a destination; copies are then controlled by that destination.</p>
